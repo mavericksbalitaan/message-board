@@ -1,0 +1,27 @@
+.welcome-wrapper {
+  background-attachment: fixed;
+  background-image: url("https://images.unsplash.com/photo-1510070009289-b5bc34383727?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  h1 {
+    color: #222;
+    font-family: "Permanent Marker", sans-serif;
+    font-size: 4rem;
+    margin-left: 4rem;
+  }
+
+  button {
+    background-color: #333;
+    color: white;
+    margin-left: 4rem;
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+  }
+}
