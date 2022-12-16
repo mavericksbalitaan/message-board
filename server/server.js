@@ -13,7 +13,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('/api', message);
-app.use('/', user);
+app.use('/api', user);
 
 db.connect((err) => {
   if (err) {
