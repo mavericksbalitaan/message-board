@@ -20,14 +20,6 @@ db.connect((err) => {
     throw err;
   }
   console.log('MySQL Connected ...');
-  const sql = 'CREATE TABLE IF NOT EXISTS messages (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, text VARCHAR(255) NOT NULL, user VARCHAR(255) NOT NULL, posted DATE NOT NULL)';
-  db.query(sql, (error, result) => {
-    if (error) {
-      throw error;
-    }
-    console.log(result);
-    console.log('TABLE messages created ...');
-  });
   const sql2 = 'CREATE TABLE IF NOT EXISTS users (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE (email))';
   db.query(sql2, (error, result) => {
     if (error) {
@@ -35,6 +27,14 @@ db.connect((err) => {
     }
     console.log(result);
     console.log('TABLE users created ...');
+  });
+  const sql = 'CREATE TABLE IF NOT EXISTS messages (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, title VARCHAR(255) NOT NULL, text VARCHAR(255) NOT NULL, userid INT NOT NULL, posted DATE NOT NULL, FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE)';
+  db.query(sql, (error, result) => {
+    if (error) {
+      throw error;
+    }
+    console.log(result);
+    console.log('TABLE messages created ...');
   });
 });
 

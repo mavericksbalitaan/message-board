@@ -7,11 +7,7 @@ function Login() {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
   const {
-    register,
-    handleSubmit,
-    reset,
-    formState,
-    formState: { isSubmitSuccessful },
+    register, handleSubmit, reset, formState,
   } = useForm();
   const apiURL = `${process.env.REACT_APP_BASE_API}/login`;
   const submitHandler = (data) => {
@@ -26,6 +22,7 @@ function Login() {
           body: JSON.stringify(data),
         });
         const datares = await response.json();
+        localStorage.setItem('userid', datares.user.id);
         if (datares.token !== 'undefined') {
           setActive(true);
         }

@@ -15,7 +15,7 @@ function verifyToken(req, res, next) {
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
-  const sql = 'SELECT COUNT(*) AS cnt, name FROM users WHERE email = ? AND password = ?';
+  const sql = 'SELECT COUNT(*) AS cnt, id, name FROM users WHERE email = ? AND password = ?';
   db.query(sql, [email, password], (error, result) => {
     if (error) {
       console.log(error);
@@ -26,8 +26,10 @@ router.post('/login', (req, res) => {
         message: 'Credentials not found. Please try again.',
       });
     }
+    console.log(result);
 
     const user = {
+      id: result[0].id,
       name: result[0].name,
       email,
       password,

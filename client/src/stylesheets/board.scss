@@ -1,8 +1,77 @@
-.board-bg {
-  background-image: url('https://images.unsplash.com/photo-1644566858654-1534e217d046?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');
+.board-wrapper {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  padding: 4rem;
   height: 100vh;
-  margin-top: 0;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-color: #333;
+  background-image: url('https://www.transparenttextures.com/patterns/absurdity.png');
+
+  button {
+    width: 100px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    padding: 0.25rem;
+    border: 1px solid white;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #333;
+      color: white;
+    }
+  }
+}
+
+.board-container {
+  display: flex;
+  flex-flow: row wrap;
+  h1 {
+    color: white;
+  }
+}
+
+.modal {
+  position: absolute;
+  background-color: lightyellow;
+  height: auto;
+  width: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    font-size: 1.5rem;
+  }
+
+  input,
+  textarea {
+    display: block;
+    padding: 0.5rem;
+    width: 100%;
+  }
+
+  .row-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    button {
+      position: static;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #333;
+        color: white;
+      }
+    }
+  }
 }

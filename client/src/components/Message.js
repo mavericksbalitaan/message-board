@@ -1,12 +1,22 @@
 import '../stylesheets/message.scss';
+import moment from 'moment';
 
 function Message({ msg }) {
-  const { text, user, posted } = msg;
+  const { title, text, posted } = msg;
   return (
     <div className="msg-wrapper">
-      <h1>{text}</h1>
-      <h1>{user}</h1>
-      <h1>{posted}</h1>
+      <h3>
+        Subject: &nbsp;
+        {title}
+      </h3>
+      <h3>
+        Message: &nbsp;
+        {text}
+      </h3>
+      <h3>
+        Posted: &nbsp;
+        {moment(posted).format('MM-DD-YYYY')}
+      </h3>
     </div>
   );
 }
