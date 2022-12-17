@@ -1,16 +1,20 @@
 .board-wrapper {
-  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
   padding: 4rem;
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #333;
-  background-image: url('https://www.transparenttextures.com/patterns/absurdity.png');
+  height: auto;
+  min-height: 100vh;
+  background-color: #dca53c;
+
+  h1 {
+    font-family: sans-serif;
+    width: 100vw;
+    margin-left: 2rem;
+    color: #333;
+    font-size: 2rem;
+  }
 
   button {
     width: 100px;
@@ -26,11 +30,18 @@
       background-color: #333;
       color: white;
     }
+
+    &:nth-of-type(2) {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
 }
 
 .board-container {
   display: flex;
+  justify-content: center;
   flex-flow: row wrap;
   h1 {
     color: white;
@@ -38,6 +49,7 @@
 }
 
 .modal {
+  z-index: 1;
   position: absolute;
   background-color: lightyellow;
   height: auto;

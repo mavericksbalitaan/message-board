@@ -28,8 +28,7 @@ db.connect((err) => {
     console.log(result);
     console.log('TABLE users created ...');
   });
-  const sql = 'CREATE TABLE IF NOT EXISTS messages (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, title VARCHAR(255) NOT NULL, text VARCHAR(255) NOT NULL, userid INT NOT NULL, posted DATE NOT NULL, FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE)';
-  db.query(sql, (error, result) => {
+  const sql = 'CREATE TABLE IF NOT EXISTS messages (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, title VARCHAR(255) NOT NULL, text VARCHAR(255) NOT NULL, userid INT NOT NULL, posted DATETIME NOT NULL, FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE)'; db.query(sql, (error, result) => {
     if (error) {
       throw error;
     }

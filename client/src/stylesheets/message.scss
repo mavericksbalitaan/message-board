@@ -1,6 +1,27 @@
 .msg-wrapper {
-  background-color: lightyellow;
+  background-color: white;
   margin: 1rem;
-  padding: 0;
+  padding: 0.5rem;
   max-width: 50vw;
+  width: 300px;
+  height: 300px;
+  border-radius: 1rem;
+  position: relative;
+
+  .closeBtn {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 25px;
+  }
+
+  h5, p {
+    border: 1px solid #444;
+    margin: 0.25rem;
+    padding: 0.25rem;
+  }
+
+  p {
+    height: 200px;
+  }
 }

@@ -11,7 +11,6 @@ function Signup() {
   } = useForm();
   const apiURL = `${process.env.REACT_APP_BASE_API}/signup`;
   const submitHandler = (data) => {
-    console.log(data);
     async function fetchData() {
       try {
         const response = await fetch(apiURL, {
@@ -22,7 +21,6 @@ function Signup() {
           body: JSON.stringify(data),
         });
         const datares = await response.json();
-        console.log(datares);
         setMsg(datares.message);
       } catch (error) {
         console.log(`Error: ${error}`);

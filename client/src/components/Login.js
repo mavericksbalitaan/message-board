@@ -11,7 +11,6 @@ function Login() {
   } = useForm();
   const apiURL = `${process.env.REACT_APP_BASE_API}/login`;
   const submitHandler = (data) => {
-    console.log(data);
     async function fetchData() {
       try {
         const response = await fetch(apiURL, {
@@ -23,10 +22,10 @@ function Login() {
         });
         const datares = await response.json();
         localStorage.setItem('userid', datares.user.id);
+        localStorage.setItem('name', datares.user.name);
         if (datares.token !== 'undefined') {
           setActive(true);
         }
-        console.log(datares);
       } catch (error) {
         console.log(`Error: ${error}`);
       }
@@ -74,7 +73,7 @@ function Login() {
           />
         </label>
         <div className="row">
-          <button type="submit">Login</button>
+          <button type="submit">Proceed</button>
           <Link to="/signup">
             <button type="button">Register</button>
           </Link>

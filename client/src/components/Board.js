@@ -3,22 +3,35 @@ import { useForm } from 'react-hook-form';
 import '../stylesheets/board.scss';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 import Message from './Message';
 
 function Board() {
-  const { register, handleSubmit, formState } = useForm();
+  const username = localStorage.getItem('name');
+  const { register, handleSubmit } = useForm();
   const [isHidden, setIsHidden] = useState('none');
 
+  const navigate = useNavigate();
+
+  // api routes
   const apiURL = `${process.env.REACT_APP_BASE_API}/messages`;
   const createURL = `${process.env.REACT_APP_BASE_API}/createmessage`;
+  const delURL = `${process.env.REACT_APP_BASE_API}/deletemessage`;
   const [msg, setMsg] = useState();
 
+  async function fetchData() {
+    const response = await fetch(apiURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userid: localStorage.getItem('userid') }),
+    });
+    const data = await response.json();
+    setMsg(data);
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(apiURL);
-      const data = await response.json();
-      setMsg(data);
-    }
     fetchData();
   }, []);
 
@@ -26,10 +39,9 @@ function Board() {
     const objdata = {
       ...data,
       userid: localStorage.getItem('userid'),
-      posted: moment().format('YYYY-MM-DD'),
+      posted: moment().format(),
     };
-    console.log(objdata);
-    async function fetchData() {
+    async function fetch1Data() {
       try {
         const response = await fetch(createURL, {
           method: 'POST',
@@ -42,18 +54,52 @@ function Board() {
         if (datares.token !== 'undefined') {
           setIsHidden('none');
         }
-        console.log(datares);
       } catch (error) {
         console.log(`Error: ${error}`);
       }
     }
+    fetch1Data();
     fetchData();
+  };
+
+  const closeHandler = (e) => {
+    const data = {
+      id: e.target.dataset.id,
+    };
+    async function delData() {
+      try {
+        await fetch(delURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+      } catch (error) {
+        console.log(`Error: ${error}`);
+      }
+    }
+    delData();
+    fetchData();
+  };
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    navigate('/login');
   };
 
   return (
     <div className="board-wrapper">
+      <h1>
+        Your message board,
+        {username}
+        !
+      </h1>
       <button type="button" onClick={() => setIsHidden('flex')}>
         + Create New
+      </button>
+      <button type="button" onClick={() => logoutHandler()}>
+        Logout
       </button>
       <div className="modal" style={{ display: isHidden }}>
         <form onSubmit={handleSubmit(submitHandler)}>
@@ -61,7 +107,7 @@ function Board() {
             Title
             <input
               type="text"
-              placeholder="Title"
+              placeholder="Input title"
               name="title"
               {...register('title', { required: true })}
             />
@@ -70,7 +116,7 @@ function Board() {
             Text
             <textarea
               type="text"
-              placeholder="Text"
+              placeholder="Your message here"
               name="text"
               cols={50}
               rows={10}
@@ -87,7 +133,9 @@ function Board() {
       </div>
       <div className="board-container">
         {msg ? (
-          msg.map((el) => <Message key={nanoid()} msg={el} />)
+          msg.map((el) => (
+            <Message key={nanoid()} msg={el} close={closeHandler} />
+          ))
         ) : (
           <h3>Loading data ...</h3>
         )}

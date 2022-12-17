@@ -26,7 +26,6 @@ router.post('/login', (req, res) => {
         message: 'Credentials not found. Please try again.',
       });
     }
-    console.log(result);
 
     const user = {
       id: result[0].id,
