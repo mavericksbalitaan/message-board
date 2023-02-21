@@ -42,3 +42,5 @@ app.listen(process.env.PORT || 5000, () => {
     `Server is running in ${process.env.HOST} at ${process.env.PORT}`,
   );
 });
+
+module.exports = app;
